@@ -1,0 +1,89 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.2",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "Create a new escalation",
+            "size": "Large",
+            "weight": "Bolder"
+        },
+        {
+            "type": "TextBlock",
+            "text": "Sorry to hear that you're having an issue! Please fill out the information on this card to proceed.",
+            "isSubtle": true,
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "Note: At this time, only national partners are supported via this tool.",
+            "wrap": true,
+            "isSubtle": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "Partner:"
+        },
+        {
+            "type": "Input.ChoiceSet",
+            "id": "partner",
+            "choices": [
+                {
+                    "title": "CDW",
+                    "value": "cdw"
+                },
+                {
+                    "title": "WWT",
+                    "value": "wwt"
+                },
+                {
+                    "title": "Presidio",
+                    "value": "presidio"
+                },
+                {
+                    "title": "Sirius",
+                    "value": "sirius"
+                }
+            ],
+            "placeholder": "Choose a partner..."
+        },
+        {
+            "type": "TextBlock",
+            "text": "Theatre:",
+            "wrap": true
+        },
+        {
+            "type": "Input.ChoiceSet",
+            "choices": [
+                {
+                    "title": "Americas",
+                    "value": "americas"
+                },
+                {
+                    "title": "EMEAR",
+                    "value": "emear"
+                },
+                {
+                    "title": "APJ",
+                    "value": "apj"
+                },
+                {
+                    "title": "China",
+                    "value": "china"
+                }
+            ],
+            "placeholder": "Choose a theatre...",
+            "id": "theatre"
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.Submit",
+            "title": "Submit",
+            "data": {
+                "action": "snooze"
+            }
+        }
+    ]
+}
