@@ -1,0 +1,5 @@
+.yarn
+
+# Don't commit config files!
+config.json
+node_modules
