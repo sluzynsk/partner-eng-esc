@@ -22,36 +22,33 @@
             "isSubtle": true
         },
         {
-            "type": "TextBlock",
-            "text": "Partner:"
-        },
-        {
-            "type": "Input.ChoiceSet",
-            "id": "partner",
-            "choices": [
+            "type": "FactSet",
+            "id": "facts",
+            "separator": true,
+            "facts": [
                 {
-                    "title": "CDW",
-                    "value": "cdw"
+                    "title": "Theatre",
+                    "value": "theatre"
                 },
                 {
-                    "title": "WWT",
-                    "value": "wwt"
+                    "title": "Segment",
+                    "value": "segment"
                 },
                 {
-                    "title": "Presidio",
-                    "value": "presidio"
+                    "title": "Partner",
+                    "value": "partner"
                 },
                 {
-                    "title": "Sirius",
-                    "value": "sirius"
+                    "title": "Customer",
+                    "value": "customer"
                 }
-            ],
-            "placeholder": "Choose a partner..."
+
+            ]
         },
         {
             "type": "TextBlock",
-            "text": "Theatre:",
-            "wrap": true
+            "text": "Theatre",
+            "id": "label"
         },
         {
             "type": "Input.ChoiceSet",
@@ -74,7 +71,7 @@
                 }
             ],
             "placeholder": "Choose a theatre...",
-            "id": "theatre"
+            "id": "choices"
         }
     ],
     "actions": [
@@ -82,7 +79,7 @@
             "type": "Action.Submit",
             "title": "Submit",
             "data": {
-                "action": "snooze"
+                "action": "sub_theatre"
             }
         }
     ]

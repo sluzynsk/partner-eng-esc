@@ -1,5 +1,9 @@
 .yarn
+.DS_Store
 
 # Don't commit config files!
 config.json
+data.json
+
+# and never ever commit 90 billion node modules!
 node_modules

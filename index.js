@@ -130,6 +130,31 @@ framework.hears("new", function (bot, trigger) {
   );
 });
 
+/*
+  Respond to hello. Keep it friendly.
+*/
+framework.hears("hello", function (bot, trigger) {  
+  console.log("heard a hello.");
+  responded = true;
+  bot.say("markdown", "Hello yourself! Try saying `new` to start a new escalation, or ask for `help`.");
+});
+
+/*
+  When the user clicks on a card, we land here. Process the card, edit the card, etc.
+*/
+framework.on('attachmentAction', function (bot, trigger) {
+  console.log("attachment receieved, processing card");
+  bot.say(`Got an attachmentAction:\n${JSON.stringify(trigger.attachmentAction, null, 2)}`);
+
+  var action = trigger.attachmentAction.inputs.action;
+  var messageId = trigger.attachmentAction.messageId;
+
+  if (action == "sub_theatre") {
+    // They picked a theatre, so stick that value in the fact block
+    framework.
+  }
+});
+
 /* 
    Command we don't know how to handle.
 */
