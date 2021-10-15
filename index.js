@@ -151,7 +151,7 @@ framework.on('attachmentAction', function (bot, trigger) {
 
   if (action == "sub_theatre") {
     // They picked a theatre, so stick that value in the fact block
-    bot.say(`Looks like you chose the ${JSON.stringify(trigger.attachmentAction.inputs.theatre)}.`)
+    bot.say(`Looks like you chose the ${JSON.stringify(trigger.attachmentAction.inputs.choices)}.`)
   };
 });
 
