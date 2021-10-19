@@ -180,7 +180,7 @@ framework.on("attachmentAction", function (bot, trigger) {
     new_card_step4.body[3].facts[0].value = theatre;
     new_card_step4.body[3].facts[1].value = partner;
     new_card_step4.body[3].facts[2].value = psm;
-    new_card_step3.body[3].facts[3].value = customer;
+    new_card_step4.body[3].facts[3].value = customer;
     bot.sendCard(new_card_step4, old_client);
   } else if (action == "sub_issue") {
     bot.censor(messageId);
