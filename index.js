@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 app.use(express.static("images"));
 const config = require("./config.json");
 const new_card = require("./new_card.json");
+var new_card_step2 = require("./new_card_step2.json");
 
 // init framework
 var framework = new framework(config);
@@ -144,7 +145,7 @@ framework.hears("hello", function (bot, trigger) {
 */
 framework.on('attachmentAction', function (bot, trigger) {
   console.log("attachment receieved, processing card");
-  bot.say(`Got an attachmentAction:\n${JSON.stringify(trigger.attachmentAction, null, 2)}`);
+  //bot.say(`Got an attachmentAction:\n${JSON.stringify(trigger.attachmentAction, null, 2)}`);
 
   var action = trigger.attachmentAction.inputs.action;
   var messageId = trigger.attachmentAction.messageId;
@@ -152,6 +153,9 @@ framework.on('attachmentAction', function (bot, trigger) {
   if (action == "sub_theatre") {
     // They picked a theatre, so stick that value in the fact block
     bot.say(`Looks like you chose the ${JSON.stringify(trigger.attachmentAction.inputs.choices)}.`)
+    new_card_step2.facts[0].value = trigger.attachmentAction.inputs.choices;
+    bot.sendCard(new_card_step2,
+      "Your client does not support buttons and cards. Please update and try again.");
   };
 });
 

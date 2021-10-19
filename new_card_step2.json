@@ -22,31 +22,42 @@
             "isSubtle": true
         },
         {
+            "type": "FactSet",
+            "id": "facts",
+            "separator": true,
+            "facts": [
+                {
+                    "title": "Theatre",
+                    "value": "theatre"
+                }
+            ]
+        },
+        {
             "type": "TextBlock",
-            "text": "Theatre",
+            "text": "Partner",
             "id": "label"
         },
         {
             "type": "Input.ChoiceSet",
             "choices": [
                 {
-                    "title": "Americas",
-                    "value": "americas"
+                    "title": "WWT",
+                    "value": "wwt"
                 },
                 {
-                    "title": "EMEAR",
-                    "value": "emear"
+                    "title": "CDW",
+                    "value": "cdw"
                 },
                 {
-                    "title": "APJ",
-                    "value": "apj"
+                    "title": "Presidio",
+                    "value": "presidio"
                 },
                 {
-                    "title": "China",
-                    "value": "china"
+                    "title": "Sirius",
+                    "value": "sirius"
                 }
             ],
-            "placeholder": "Choose a theatre...",
+            "placeholder": "Choose a partner...",
             "id": "choices"
         }
     ],
@@ -55,7 +66,7 @@
             "type": "Action.Submit",
             "title": "Submit",
             "data": {
-                "action": "sub_theatre"
+                "action": "sub_partner"
             }
         }
     ]
