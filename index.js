@@ -13,6 +13,7 @@ const config = require("./config.json");
 const new_card = require("./new_card.json");
 var new_card_step2 = require("./new_card_step2.json");
 var new_card_step3 = require("./new_card_step3.json");
+var new_card_step4 = require("./new_card_step4.json");
 const old_client =
   "Your client does not support buttons and cards. Please update and try again.";
 
@@ -185,7 +186,7 @@ framework.on("attachmentAction", function (bot, trigger) {
     bot.censor(messageId);
     issue = trigger.attachmentAction.inputs.issue;
     bot.say("markdown",
-    `Thank you for those details. I will now open a Webex room with ${psm}.`);
+    `Thank you for those details. I will now open a Webex room with ${psm} to talk about ${partner}.`);
   }
 });
 
