@@ -46,27 +46,9 @@
             "id": "label"
         },
         {
-            "type": "Input.ChoiceSet",
-            "choices": [
-                {
-                    "title": "WWT",
-                    "value": "wwt"
-                },
-                {
-                    "title": "CDW",
-                    "value": "cdw"
-                },
-                {
-                    "title": "Presidio",
-                    "value": "presidio"
-                },
-                {
-                    "title": "Sirius",
-                    "value": "sirius"
-                }
-            ],
-            "placeholder": "Choose a partner...",
-            "id": "choices"
+            "type": "Input.Text",
+            "placeholder": "Enter a customer name...",
+            "id": "customer"
         }
     ],
     "actions": [
@@ -74,7 +56,7 @@
             "type": "Action.Submit",
             "title": "Submit",
             "data": {
-                "action": "sub_partner"
+                "action": "sub_customer"
             }
         }
     ]

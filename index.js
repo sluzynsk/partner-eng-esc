@@ -16,6 +16,10 @@ var new_card_step3 = require("./new_card_step3.json");
 const old_client =
   "Your client does not support buttons and cards. Please update and try again.";
 
+var theatre = "";
+var partner = "";
+var customer = "";
+
 // init framework
 var framework = new framework(config);
 framework.start();
@@ -156,15 +160,28 @@ framework.on("attachmentAction", function (bot, trigger) {
     // They picked a theatre, so stick that value in the fact block
     // Also delete the prior card to try to leave less of a mess.
     bot.censor(messageId);
-    new_card_step2.body[3].facts[0].value =
-      trigger.attachmentAction.inputs.choices;
+    theatre = trigger.attachmentAction.inputs.choices;
+    new_card_step2.body[3].facts[0].value = theatre;
     bot.sendCard(new_card_step2, old_client);
   } else if (action == "sub_partner") {
     bot.censor(messageId);
-    new_card_step3.body[3].facts[1].value =
-      trigger.attachmentAction.inputs.choices;
-    // add in SA mapping
+    partner = trigger.attachmentAction.inputs.choices;
+    new_card_step3.body[3].facts[1].value = partner;
+    new_card_step3.body[3].facts[2].value =
+      "Sven McGillicutty <sven@cisco.com>";
+    // add in SA mapping for real, dummy for now
     bot.sendCard(new_card_step3, old_client);
+  } else if (action == "sub_customer") {
+    bot.censor(messageId);
+    customer = trigger.attachmentAction.inputs.customer;
+    bot.say(
+      "markdown",
+      `Theatre: ${theatre}, Partner: ${partner}, Customer: ${customer}`
+    );
+    bot.say(
+      "markdown",
+      "Now, in your own words, please describe the situation. Say `end` on a line by itself when you're done typing."
+    );
   }
 });
 
