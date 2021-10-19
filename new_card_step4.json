@@ -37,18 +37,23 @@
                 {
                     "title": "PSM",
                     "value": "value"
+                },
+                {
+                    "title": "Customer",
+                    "value": "value"
                 }
             ]
         },
         {
             "type": "TextBlock",
-            "text": "Customer",
+            "text": "Issue Details",
             "id": "label"
         },
         {
             "type": "Input.Text",
-            "placeholder": "Enter a customer name...",
-            "id": "customer"
+            "placeholder": "Please describe the issue in detail.",
+            "id": "issue",
+            "isMultiline": true
         }
     ],
     "actions": [
@@ -56,7 +61,7 @@
             "type": "Action.Submit",
             "title": "Submit",
             "data": {
-                "action": "sub_customer"
+                "action": "sub_issue"
             }
         }
     ]

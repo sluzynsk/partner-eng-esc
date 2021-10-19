@@ -19,6 +19,8 @@ const old_client =
 var theatre = "";
 var partner = "";
 var customer = "";
+var psm = "Sven McPeesem <sven@cisco.com>";
+var issue = "";
 
 // init framework
 var framework = new framework(config);
@@ -166,22 +168,24 @@ framework.on("attachmentAction", function (bot, trigger) {
   } else if (action == "sub_partner") {
     bot.censor(messageId);
     partner = trigger.attachmentAction.inputs.choices;
+    new_card_step3.body[3].facts[0].value = theatre;
     new_card_step3.body[3].facts[1].value = partner;
-    new_card_step3.body[3].facts[2].value =
-      "Sven McGillicutty <sven@cisco.com>";
+    new_card_step3.body[3].facts[2].value = psm;
     // add in SA mapping for real, dummy for now
     bot.sendCard(new_card_step3, old_client);
   } else if (action == "sub_customer") {
     bot.censor(messageId);
     customer = trigger.attachmentAction.inputs.customer;
-    bot.say(
-      "markdown",
-      `Theatre: ${theatre}, Partner: ${partner}, Customer: ${customer}`
-    );
-    bot.say(
-      "markdown",
-      "Now, in your own words, please describe the situation. Say `end` on a line by itself when you're done typing."
-    );
+    new_card_step4.body[3].facts[0].value = theatre;
+    new_card_step4.body[3].facts[1].value = partner;
+    new_card_step4.body[3].facts[2].value = psm;
+    new_card_step3.body[3].facts[3].value = customer;
+    bot.sendCard(new_card_step4, old_client);
+  } else if (action == "sub_issue") {
+    bot.censor(messageId);
+    issue = trigger.attachmentAction.inputs.issue;
+    bot.say("markdown",
+    `Thank you for those details. I will now open a Webex room with ${psm}.`);
   }
 });
 
