@@ -13,6 +13,8 @@ const config = require("./config.json");
 const new_card = require("./new_card.json");
 var new_card_step2 = require("./new_card_step2.json");
 var new_card_step3 = require("./new_card_step3.json");
+const old_client =
+  "Your client does not support buttons and cards. Please update and try again.";
 
 // init framework
 var framework = new framework(config);
@@ -126,10 +128,7 @@ framework.hears("close", function (bot, trigger) {
 framework.hears("new", function (bot, trigger) {
   console.log("new command received");
   responded = true;
-  bot.sendCard(
-    new_card,
-    "Your client does not support buttons & cards. Please use an updated client."
-  );
+  bot.sendCard(new_card, old_client);
 });
 
 /*
@@ -149,7 +148,6 @@ framework.hears("hello", function (bot, trigger) {
 */
 framework.on("attachmentAction", function (bot, trigger) {
   console.log("attachment receieved, processing card");
-  //bot.say(`Got an attachmentAction:\n${JSON.stringify(trigger.attachmentAction, null, 2)}`);
 
   var action = trigger.attachmentAction.inputs.action;
   var messageId = trigger.attachmentAction.messageId;
@@ -157,21 +155,16 @@ framework.on("attachmentAction", function (bot, trigger) {
   if (action == "sub_theatre") {
     // They picked a theatre, so stick that value in the fact block
     // Also delete the prior card to try to leave less of a mess.
-    bot.censor(trigger.attachmentAction.messageId);
+    bot.censor(messageId);
     new_card_step2.body[3].facts[0].value =
       trigger.attachmentAction.inputs.choices;
-    bot.sendCard(
-      new_card_step2,
-      "Your client does not support buttons and cards. Please update and try again."
-    );
+    bot.sendCard(new_card_step2, old_client);
   } else if (action == "sub_partner") {
-    bot.say(
-      `Looks like you chose the ${JSON.stringify(
-        trigger.attachmentAction.inputs.choices
-      )}.`
-    );
+    bot.censor(messageId);
     new_card_step3.body[3].facts[1].value =
       trigger.attachmentAction.inputs.choices;
+    // add in SA mapping
+    bot.sendCard(new_card_step3, old_client);
   }
 });
 
