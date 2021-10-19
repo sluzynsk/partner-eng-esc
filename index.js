@@ -12,6 +12,7 @@ app.use(express.static("images"));
 const config = require("./config.json");
 const new_card = require("./new_card.json");
 var new_card_step2 = require("./new_card_step2.json");
+var new_card_step3 = require("./new_card_step3.json");
 
 // init framework
 var framework = new framework(config);
@@ -134,16 +135,19 @@ framework.hears("new", function (bot, trigger) {
 /*
   Respond to hello. Keep it friendly.
 */
-framework.hears("hello", function (bot, trigger) {  
+framework.hears("hello", function (bot, trigger) {
   console.log("heard a hello.");
   responded = true;
-  bot.say("markdown", "Hello yourself! Try saying `new` to start a new escalation, or ask for `help`.");
+  bot.say(
+    "markdown",
+    "Hello yourself! Try saying `new` to start a new escalation, or ask for `help`."
+  );
 });
 
 /*
   When the user clicks on a card, we land here. Process the card, edit the card, etc.
 */
-framework.on('attachmentAction', function (bot, trigger) {
+framework.on("attachmentAction", function (bot, trigger) {
   console.log("attachment receieved, processing card");
   //bot.say(`Got an attachmentAction:\n${JSON.stringify(trigger.attachmentAction, null, 2)}`);
 
@@ -152,11 +156,23 @@ framework.on('attachmentAction', function (bot, trigger) {
 
   if (action == "sub_theatre") {
     // They picked a theatre, so stick that value in the fact block
-    bot.say(`Looks like you chose the ${JSON.stringify(trigger.attachmentAction.inputs.choices)}.`);
-    new_card_step2.body[3].facts[0].value = trigger.attachmentAction.inputs.choices;
-    bot.sendCard(new_card_step2,
-      "Your client does not support buttons and cards. Please update and try again.");
-  };
+    // Also delete the prior card to try to leave less of a mess.
+    bot.censor(trigger.attachmentAction.messageId);
+    new_card_step2.body[3].facts[0].value =
+      trigger.attachmentAction.inputs.choices;
+    bot.sendCard(
+      new_card_step2,
+      "Your client does not support buttons and cards. Please update and try again."
+    );
+  } else if (action == "sub_partner") {
+    bot.say(
+      `Looks like you chose the ${JSON.stringify(
+        trigger.attachmentAction.inputs.choices
+      )}.`
+    );
+    new_card_step3.body[3].facts[1].value =
+      trigger.attachmentAction.inputs.choices;
+  }
 });
 
 /* 

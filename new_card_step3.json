@@ -1,0 +1,81 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.2",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "Create a new escalation",
+            "size": "Large",
+            "weight": "Bolder"
+        },
+        {
+            "type": "TextBlock",
+            "text": "Sorry to hear that you're having an issue! Please fill out the information on this card to proceed.",
+            "isSubtle": true,
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "Note: At this time, only national partners are supported via this tool.",
+            "wrap": true,
+            "isSubtle": true
+        },
+        {
+            "type": "FactSet",
+            "id": "facts",
+            "separator": true,
+            "facts": [
+                {
+                    "title": "Theatre",
+                    "value": "theatre"
+                },
+                {
+                    "title": "Partner",
+                    "value": "value"
+                },
+                {
+                    "title": "SA",
+                    "value": "value"
+                }
+            ]
+        },
+        {
+            "type": "TextBlock",
+            "text": "Customer",
+            "id": "label"
+        },
+        {
+            "type": "Input.ChoiceSet",
+            "choices": [
+                {
+                    "title": "WWT",
+                    "value": "wwt"
+                },
+                {
+                    "title": "CDW",
+                    "value": "cdw"
+                },
+                {
+                    "title": "Presidio",
+                    "value": "presidio"
+                },
+                {
+                    "title": "Sirius",
+                    "value": "sirius"
+                }
+            ],
+            "placeholder": "Choose a partner...",
+            "id": "choices"
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.Submit",
+            "title": "Submit",
+            "data": {
+                "action": "sub_partner"
+            }
+        }
+    ]
+}
