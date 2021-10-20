@@ -10,7 +10,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(express.static("images"));
 const config = require("./config.json");
-const new_card = require("./new_card.json");
+var new_card_step1 = require("./new_card_step1.json");
 var new_card_step2 = require("./new_card_step2.json");
 var new_card_step3 = require("./new_card_step3.json");
 var new_card_step4 = require("./new_card_step4.json");
@@ -135,7 +135,7 @@ framework.hears("close", function (bot, trigger) {
 framework.hears("new", function (bot, trigger) {
   console.log("new command received");
   responded = true;
-  bot.sendCard(new_card, old_client);
+  bot.sendCard(new_card_step1, old_client);
 });
 
 /*
@@ -185,9 +185,12 @@ framework.on("attachmentAction", function (bot, trigger) {
   } else if (action == "sub_issue") {
     bot.censor(messageId);
     issue = trigger.attachmentAction.inputs.issue;
-    bot.say("markdown",
-    `Thank you for those details. I will now open a Webex room with ${psm} to talk about ${partner}.`);
+    bot.say(
+      "markdown",
+      `Thank you for those details. I will now open a Webex room with ${psm} to talk about ${partner}.`
+    );
   }
+  // End of new card workflow.
 });
 
 /* 
