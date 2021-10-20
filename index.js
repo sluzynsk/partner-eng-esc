@@ -2,29 +2,29 @@
 // Steven Luzynski <sluzynsk@cisco.com>
 // October, 2021
 
-var framework = require("webex-node-bot-framework");
-var webhook = require("webex-node-bot-framework/webhook");
-var express = require("express");
-var bodyParser = require("body-parser");
-var app = express();
+let framework = require("webex-node-bot-framework");
+let webhook = require("webex-node-bot-framework/webhook");
+let express = require("express");
+let bodyParser = require("body-parser");
+let app = express();
 app.use(bodyParser.json());
 app.use(express.static("images"));
 const config = require("./config.json");
-var new_card_step1 = require("./new_card_step1.json");
-var new_card_step2 = require("./new_card_step2.json");
-var new_card_step3 = require("./new_card_step3.json");
-var new_card_step4 = require("./new_card_step4.json");
+let new_card_step1 = require("./new_card_step1.json");
+let new_card_step2 = require("./new_card_step2.json");
+let new_card_step3 = require("./new_card_step3.json");
+let new_card_step4 = require("./new_card_step4.json");
 const old_client =
   "Your client does not support buttons and cards. Please update and try again.";
 
-var theatre = "";
-var partner = "";
-var customer = "";
-var psm = "Sven McPeesem <sven@cisco.com>";
-var issue = "";
+let theatre = "";
+let partner = "";
+let customer = "";
+let psm = "Sven McPeesem <sven@cisco.com>";
+let issue = "";
 
 // init framework
-var framework = new framework(config);
+let framework = new framework(config);
 framework.start();
 console.log("Starting framework, please wait...");
 
@@ -45,7 +45,7 @@ framework.on("spawn", (bot, id, actorId) => {
   } else {
     // When actorId is present it means someone added your bot got added to a new space
     // Lets find out more about them..
-    var msg =
+    let msg =
       "You can say `help` to get the list of words I am able to respond to." +
       "To start a new escalation, say `new`. To get your existing escalations," +
       "say `list`. To get the status of an escalation, say `status`.";
@@ -156,18 +156,15 @@ framework.hears("hello", function (bot, trigger) {
 framework.on("attachmentAction", function (bot, trigger) {
   console.log("attachment receieved, processing card");
 
-  var action = trigger.attachmentAction.inputs.action;
-  var messageId = trigger.attachmentAction.messageId;
+  let action = trigger.attachmentAction.inputs.action;
+  let messageId = trigger.attachmentAction.messageId;
+  bot.censor(messageId);
 
   if (action == "sub_theatre") {
-    // They picked a theatre, so stick that value in the fact block
-    // Also delete the prior card to try to leave less of a mess.
-    bot.censor(messageId);
     theatre = trigger.attachmentAction.inputs.choices;
     new_card_step2.body[3].facts[0].value = theatre;
     bot.sendCard(new_card_step2, old_client);
   } else if (action == "sub_partner") {
-    bot.censor(messageId);
     partner = trigger.attachmentAction.inputs.choices;
     new_card_step3.body[3].facts[0].value = theatre;
     new_card_step3.body[3].facts[1].value = partner;
@@ -175,7 +172,6 @@ framework.on("attachmentAction", function (bot, trigger) {
     // add in SA mapping for real, dummy for now
     bot.sendCard(new_card_step3, old_client);
   } else if (action == "sub_customer") {
-    bot.censor(messageId);
     customer = trigger.attachmentAction.inputs.customer;
     new_card_step4.body[3].facts[0].value = theatre;
     new_card_step4.body[3].facts[1].value = partner;
@@ -183,7 +179,6 @@ framework.on("attachmentAction", function (bot, trigger) {
     new_card_step4.body[3].facts[3].value = customer;
     bot.sendCard(new_card_step4, old_client);
   } else if (action == "sub_issue") {
-    bot.censor(messageId);
     issue = trigger.attachmentAction.inputs.issue;
     bot.say(
       "markdown",
@@ -230,7 +225,7 @@ app.get("/", function (req, res) {
 
 app.post("/", webhook(framework));
 
-var server = app.listen(config.port, function () {
+let server = app.listen(config.port, function () {
   framework.debug("framework listening on port %s", config.port);
 });
 
