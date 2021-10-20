@@ -56,7 +56,7 @@ framework.on("spawn", (bot, id, actorId) => {
       })
       .catch((e) => {
         console.error(
-          `Failed to lookup user details in framwork.on("spawn"): ${e.message}`
+          `Failed to lookup user details in framework.on("spawn"): ${e.message}`
         );
         msg = `Hello there. ${msg}`;
       })
@@ -154,31 +154,31 @@ framework.hears("hello", function (bot, trigger) {
   When the user clicks on a card, we land here. Process the card, edit the card, etc.
 */
 framework.on("attachmentAction", function (bot, trigger) {
-  console.log("attachment receieved, processing card");
+  console.log("attachment received, processing card");
 
   let action = trigger.attachmentAction.inputs.action;
   let messageId = trigger.attachmentAction.messageId;
   bot.censor(messageId);
 
-  if (action == "sub_theatre") {
+  if (action === "sub_theatre") {
     theatre = trigger.attachmentAction.inputs.choices;
     new_card_step2.body[3].facts[0].value = theatre;
     bot.sendCard(new_card_step2, old_client);
-  } else if (action == "sub_partner") {
+  } else if (action === "sub_partner") {
     partner = trigger.attachmentAction.inputs.choices;
     new_card_step3.body[3].facts[0].value = theatre;
     new_card_step3.body[3].facts[1].value = partner;
     new_card_step3.body[3].facts[2].value = psm;
     // add in SA mapping for real, dummy for now
     bot.sendCard(new_card_step3, old_client);
-  } else if (action == "sub_customer") {
+  } else if (action === "sub_customer") {
     customer = trigger.attachmentAction.inputs.customer;
     new_card_step4.body[3].facts[0].value = theatre;
     new_card_step4.body[3].facts[1].value = partner;
     new_card_step4.body[3].facts[2].value = psm;
     new_card_step4.body[3].facts[3].value = customer;
     bot.sendCard(new_card_step4, old_client);
-  } else if (action == "sub_issue") {
+  } else if (action === "sub_issue") {
     issue = trigger.attachmentAction.inputs.issue;
     bot.say(
       "markdown",
@@ -199,7 +199,7 @@ framework.hears(/.*/, function (bot, trigger) {
       .say(`Sorry, I don't know how to respond to "${trigger.text}"`)
       .then(() => sendHelp(bot))
       .catch((e) =>
-        console.error(`Problem in the unexepected command hander: ${e.message}`)
+        console.error(`Problem in the unexpected command handler: ${e.message}`)
       );
   }
   responded = false;
@@ -231,7 +231,7 @@ let server = app.listen(config.port, function () {
 
 // gracefully shutdown (ctrl-c)
 process.on("SIGINT", function () {
-  framework.debug("stoppping...");
+  framework.debug("stopping...");
   server.close();
   framework.stop().then(function () {
     process.exit();
