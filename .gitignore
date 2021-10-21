@@ -1,6 +1,7 @@
 .yarn
 .DS_Store
 .yarnrc.yml
+.pnp.js
 
 # Don't commit config files!
 config.json
