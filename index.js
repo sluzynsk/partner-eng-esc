@@ -2,7 +2,7 @@
 // Steven Luzynski <sluzynsk@cisco.com>
 // October, 2021
 
-let framework = require("webex-node-bot-framework");
+let the_framework = require("webex-node-bot-framework");
 let webhook = require("webex-node-bot-framework/webhook");
 let express = require("express");
 let bodyParser = require("body-parser");
@@ -24,7 +24,7 @@ let psm = "Sven McPeesem <sven@cisco.com>";
 let issue = "";
 
 // init framework
-let framework = new framework(config);
+let framework = new the_framework(config);
 framework.start();
 console.log("Starting framework, please wait...");
 
