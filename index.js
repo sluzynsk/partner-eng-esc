@@ -169,13 +169,10 @@ framework.on("attachmentAction", function (bot, trigger) {
     partner = trigger.attachmentAction.inputs.choices;
     // Map chosen partner to the PSM
     data = psm_map.filter((psm_map) => psm_map.partner == partner);
-    console.log(data);
-    psm = data.psm;
-    console.log(psm);
+    psm = data[0].psm;
     new_card_step3.body[3].facts[0].value = theatre;
     new_card_step3.body[3].facts[1].value = partner;
     new_card_step3.body[3].facts[2].value = psm;
-    // add in SA mapping for real, dummy for now
     bot.sendCard(new_card_step3, old_client);
   } else if (action === "sub_customer") {
     customer = trigger.attachmentAction.inputs.customer;
