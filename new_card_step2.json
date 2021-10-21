@@ -42,19 +42,15 @@
             "choices": [
                 {
                     "title": "WWT",
-                    "value": "wwt"
+                    "value": "WWT"
                 },
                 {
                     "title": "CDW",
-                    "value": "cdw"
+                    "value": "CDW"
                 },
                 {
                     "title": "Presidio",
-                    "value": "presidio"
-                },
-                {
-                    "title": "Sirius",
-                    "value": "sirius"
+                    "value": "Presidio"
                 }
             ],
             "placeholder": "Choose a partner...",

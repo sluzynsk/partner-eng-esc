@@ -31,19 +31,15 @@
             "choices": [
                 {
                     "title": "Americas",
-                    "value": "americas"
+                    "value": "Americas"
                 },
                 {
                     "title": "EMEAR",
-                    "value": "emear"
+                    "value": "EMEAR"
                 },
                 {
                     "title": "APJ",
-                    "value": "apj"
-                },
-                {
-                    "title": "China",
-                    "value": "china"
+                    "value": "APJ"
                 }
             ],
             "placeholder": "Choose a theatre...",

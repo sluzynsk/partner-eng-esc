@@ -14,13 +14,14 @@ let new_card_step1 = require("./new_card_step1.json");
 let new_card_step2 = require("./new_card_step2.json");
 let new_card_step3 = require("./new_card_step3.json");
 let new_card_step4 = require("./new_card_step4.json");
+const psm_map = require("./data.json");
 const old_client =
   "Your client does not support buttons and cards. Please update and try again.";
 
 let theatre = "";
 let partner = "";
 let customer = "";
-let psm = "Sven McPeesem <sven@cisco.com>";
+let psm = "";
 let issue = "";
 
 // init framework
@@ -141,7 +142,7 @@ framework.hears("new", function (bot, trigger) {
 /*
   Respond to hello. Keep it friendly.
 */
-framework.hears("hello", function (bot, trigger) {
+framework.hears(/hello|hi/i, function (bot, trigger) {
   console.log("heard a hello.");
   responded = true;
   bot.say(
@@ -166,6 +167,9 @@ framework.on("attachmentAction", function (bot, trigger) {
     bot.sendCard(new_card_step2, old_client);
   } else if (action === "sub_partner") {
     partner = trigger.attachmentAction.inputs.choices;
+    // Map chosen partner to the PSM
+    psm = psm_map.filter((psm_map) => psm_map.partner == partner);
+    console.log(psm);
     new_card_step3.body[3].facts[0].value = theatre;
     new_card_step3.body[3].facts[1].value = partner;
     new_card_step3.body[3].facts[2].value = psm;
