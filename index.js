@@ -169,7 +169,7 @@ framework.on("attachmentAction", function (bot, trigger) {
     partner = trigger.attachmentAction.inputs.choices;
     // Map chosen partner to the PSM
     data = psm_map.filter((psm_map) => psm_map.partner == partner);
-    psm = data.psm.value;
+    psm = data.psm[0].psm;
     console.log(psm);
     new_card_step3.body[3].facts[0].value = theatre;
     new_card_step3.body[3].facts[1].value = partner;
