@@ -163,19 +163,24 @@ framework.on("attachmentAction", function (bot, trigger) {
 
   if (action === "sub_theatre") {
     theatre = trigger.attachmentAction.inputs.choices;
+    bot.store("theatre", theatre);
     new_card_step2.body[3].facts[0].value = theatre;
     bot.sendCard(new_card_step2, old_client);
   } else if (action === "sub_partner") {
     partner = trigger.attachmentAction.inputs.choices;
+    bot.store("partner", partner);
+    bot.roomRename(`Engineering Escalation for ${partner}`);
     // Map chosen partner to the PSM
     data = psm_map.filter((psm_map) => psm_map.partner == partner);
     psm = data[0].psm;
+    bot.store("psm", psm);
     new_card_step3.body[3].facts[0].value = theatre;
     new_card_step3.body[3].facts[1].value = partner;
     new_card_step3.body[3].facts[2].value = psm;
     bot.sendCard(new_card_step3, old_client);
   } else if (action === "sub_customer") {
     customer = trigger.attachmentAction.inputs.customer;
+    bot.store("customer", customer);
     new_card_step4.body[3].facts[0].value = theatre;
     new_card_step4.body[3].facts[1].value = partner;
     new_card_step4.body[3].facts[2].value = psm;
@@ -183,6 +188,7 @@ framework.on("attachmentAction", function (bot, trigger) {
     bot.sendCard(new_card_step4, old_client);
   } else if (action === "sub_issue") {
     issue = trigger.attachmentAction.inputs.issue;
+    bot.store("issue", issue);
     bot.say(
       "markdown",
       `Thank you for those details. I will now open a Webex room with ${psm} to talk about ${partner}.`
