@@ -108,13 +108,14 @@ framework.hears("list", function (bot, trigger) {
 
 /*
   Status command
-  Get the status of a given escalation. Prompt the user
-  if they have more than one open.
+  Get the status of a given escalation. 
 */
 framework.hears("status", function (bot, trigger) {
   console.log("status command received");
   responded = true;
-  bot.say("markdown", "Here's the status of your current escalations:");
+  bot.say("markdown", "Here's the status of your current escalation:");
+  msg = `${partner} is working with ${customer} in ${theatre}.`
+  bot.say(msg);
 });
 
 /*
