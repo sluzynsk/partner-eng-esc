@@ -23,6 +23,7 @@ let partner = "";
 let customer = "";
 let psm = "";
 let issue = "";
+let roomCreator = "";
 
 // init framework
 let framework = new the_framework(config);
@@ -47,13 +48,14 @@ framework.on("spawn", (bot, id, actorId) => {
     // When actorId is present it means someone added your bot got added to a new space
     // Lets find out more about them..
     let msg =
-      "You can say `help` to get the list of words I am able to respond to." +
+      "You can say `help` to get the list of words I am able to respond to.\n\n" +
       "To start a new escalation, say `new`. To get your existing escalations," +
       "say `list`. To get the status of an escalation, say `status`.";
     bot.webex.people
       .get(actorId)
       .then((user) => {
         msg = `Hello there ${user.displayName}. ${msg}`;
+        roomCreator = user.email;
       })
       .catch((e) => {
         console.error(
@@ -193,7 +195,7 @@ framework.on("attachmentAction", function (bot, trigger) {
       `Thank you for those details. I will now invite ${psm} to this space.`
     );
     bot.add(psm);
-    msg = `Hi, ${psm}. ${actorId} is having an issue with ${partner} that needs your attention.\n\n`;
+    msg = `Hi, ${psm}. ${roomCreator} is having an issue with ${partner} that needs your attention.\n\n`;
     msg += `In their words, ${partner} is working with ${customer} and this has happened:\n\n\ ${issue}`;
     bot.say("markdown", msg);
   }
