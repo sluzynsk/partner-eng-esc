@@ -169,7 +169,6 @@ framework.on("attachmentAction", function (bot, trigger) {
   } else if (action === "sub_partner") {
     partner = trigger.attachmentAction.inputs.choices;
     bot.store("partner", partner);
-    bot.roomRename(`Engineering Escalation for ${partner}`);
     // Map chosen partner to the PSM
     data = psm_map.filter((psm_map) => psm_map.partner == partner);
     psm = data[0].psm;
