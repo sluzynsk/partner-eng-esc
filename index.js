@@ -190,8 +190,12 @@ framework.on("attachmentAction", function (bot, trigger) {
     bot.store("issue", issue);
     bot.say(
       "markdown",
-      `Thank you for those details. I will now open a Webex room with ${psm} to talk about ${partner}.`
+      `Thank you for those details. I will now invite ${psm} to this space.`
     );
+    bot.add(psm);
+    msg = `Hi, ${psm}. ${actorId} is having an issue with ${partner} that needs your attention.\n\n`;
+    msg += `In their words, ${partner} is working with ${customer} and this has happened:\n\n\ ${issue}`;
+    bot.say("markdown", msg);
   }
   // End of new card workflow.
 });
