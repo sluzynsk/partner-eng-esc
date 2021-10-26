@@ -114,6 +114,13 @@ framework.hears("status", function (bot, trigger) {
   console.log("status command received");
   responded = true;
   bot.say("markdown", "Here's the status of your current escalation:");
+
+  theatre = bot.get("theatre");
+  partner = bot.get("partner");
+  customer = bot.get("customer");
+  psm = bot.get("psm");
+  issue = bot.get("issue");
+
   msg = `${partner} is working with ${customer} in ${theatre}.`
   bot.say(msg);
 });
