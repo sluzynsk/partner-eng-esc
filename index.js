@@ -66,11 +66,11 @@ framework.on("spawn", (bot, id, actorId) => {
       .finally(() => {
         // Say hello, and tell users what you do!
         if (bot.isDirect) {
-          bot.say("markdown", msg);
+          bot.say(msg);
         } else {
           let botName = bot.person.displayName;
           msg += `\n\nDon't forget, in order for me to see your messages in this group space, be sure to *@mention* ${botName}.`;
-          bot.say("markdown", msg);
+          bot.say(msg);
         }
       });
   }
@@ -97,23 +97,13 @@ framework.hears(
 );
 
 /*
-  List command
-  List current open escalations for the requesting user.
-*/
-framework.hears("list", function (bot, trigger) {
-  console.log("list command received");
-  responded = true;
-  bot.say("markdown", "Here's a list of your current escalations:");
-});
-
-/*
   Status command
   Get the status of a given escalation. 
 */
 framework.hears("status", function (bot, trigger) {
   console.log("status command received");
   responded = true;
-  bot.say("markdown", "Here's the status of your current escalation:");
+  bot.say("Here's the status of your current escalation:");
 
   theatre = bot.get("theatre");
   partner = bot.get("partner");
@@ -121,8 +111,7 @@ framework.hears("status", function (bot, trigger) {
   psm = bot.get("psm");
   issue = bot.get("issue");
 
-  msg = `${partner} is working with ${customer} in ${theatre}.`
-  bot.say(msg);
+  bot.say(`${partner} is working with ${customer} in ${theatre}.`);
 });
 
 /*
@@ -133,9 +122,10 @@ framework.hears("close", function (bot, trigger) {
   console.log("close command received");
   responded = true;
   bot.say(
-    "markdown",
+
     "Glad to hear your problem is resolved. Let's close that escalation."
   );
+  bot.implode();
 });
 
 /*
@@ -156,7 +146,6 @@ framework.hears(/hello|hi/i, function (bot, trigger) {
   console.log("heard a hello.");
   responded = true;
   bot.say(
-    "markdown",
     "Hello yourself! Try saying `new` to start a new escalation, or ask for `help`."
   );
 });
@@ -199,13 +188,12 @@ framework.on("attachmentAction", function (bot, trigger) {
     issue = trigger.attachmentAction.inputs.issue;
     bot.store("issue", issue);
     bot.say(
-      "markdown",
       `Thank you for those details. I will now invite ${psm} to this space.`
     );
-    bot.add(psm);
+    bot.add(psm); // this doesn't work yet and definitely needs exception handling
     msg = `Hi, ${psm}. ${roomCreator} is having an issue with ${partner} that needs your attention.\n\n`;
     msg += `In their words, ${partner} is working with ${customer} and this has happened:\n\n\ ${issue}`;
-    bot.say("markdown", msg);
+    bot.say(msg);
   }
   // End of new card workflow.
 });
@@ -233,9 +221,8 @@ function sendHelp(bot) {
     "These are the commands I can respond to:",
     "\n\n " +
       "1. **new**   (create a new escalation) \n" +
-      "2. **list**  (get your current escalations) \n" +
-      "3. **status**  (get details about a current escalation) \n" +
-      "4. **close** (close an escalation) \n"
+      "2. **status**  (get details about a current escalation) \n" +
+      "3. **close** (close an escalation) \n"
   );
 }
 
