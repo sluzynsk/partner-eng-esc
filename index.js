@@ -105,11 +105,11 @@ framework.hears("status", function (bot, trigger) {
   responded = true;
   bot.say("Here's the status of your current escalation:");
 
-  theatre = bot.get("theatre");
-  partner = bot.get("partner");
-  customer = bot.get("customer");
-  psm = bot.get("psm");
-  issue = bot.get("issue");
+  theatre = bot.recall("theatre");
+  partner = bot.recall("partner");
+  customer = bot.recall("customer");
+  psm = bot.recall("psm");
+  issue = bot.recall("issue");
 
   bot.say(`${partner} is working with ${customer} in ${theatre}.`);
 });
