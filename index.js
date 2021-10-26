@@ -189,7 +189,7 @@ framework.on("attachmentAction", function (bot, trigger) {
     bot.say(
       `Thank you for those details. I will now invite ${psm} to this space.`
     );
-    bot.newRoom(`Engineering Escalation - ${partner}`,`${roomCreator},${psm}`);
+    bot.newRoom(`Engineering Escalation - ${partner}`,`${roomCreator},${psm}`,false);
     //bot.add(psm); // this doesn't work yet and definitely needs exception handling
     msg = `Hi, ${psm}. ${roomCreator} is having an issue with ${partner} that needs your attention.\n\n`;
     msg += `In their words, ${partner} is working with ${customer} and this has happened:\n\n\ ${issue}`;
