@@ -122,10 +122,9 @@ framework.hears("close", function (bot, trigger) {
   console.log("close command received");
   responded = true;
   bot.say(
-
     "Glad to hear your problem is resolved. Let's close that escalation."
   );
-  bot.implode();
+  bot.implode(); // This doesn't work in a 1:1 room, need exception handling. 
 });
 
 /*
@@ -190,7 +189,8 @@ framework.on("attachmentAction", function (bot, trigger) {
     bot.say(
       `Thank you for those details. I will now invite ${psm} to this space.`
     );
-    bot.add(psm); // this doesn't work yet and definitely needs exception handling
+    bot.newRoom(`Engineering Escalation - ${partner}`,`${roomCreator},${psm}`);
+    //bot.add(psm); // this doesn't work yet and definitely needs exception handling
     msg = `Hi, ${psm}. ${roomCreator} is having an issue with ${partner} that needs your attention.\n\n`;
     msg += `In their words, ${partner} is working with ${customer} and this has happened:\n\n\ ${issue}`;
     bot.say(msg);
